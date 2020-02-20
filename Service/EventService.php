@@ -80,18 +80,18 @@ class EventService
      */
     private $userCompanyRepository;
 
-	/**
-	 * EventService constructor.
-	 *
-	 * @param EntityManagerInterface $entityManager
-	 * @param EventRepository $eventRepository
-	 * @param EventDetailRepository $eventDetailRepository
-	 * @param SerializerInterface $serializer
-	 * @param UploaderHelper $uploaderHelper
-	 * @param ValidatorInterface $validator
-	 * @param PropertyListExtractorInterface $propertyListExtractor
-	 * @param UserCompanyRepository $userCompanyRepository
-	 */
+    /**
+     * EventService constructor.
+     *
+     * @param EntityManagerInterface $entityManager
+     * @param EventRepository $eventRepository
+     * @param EventDetailRepository $eventDetailRepository
+     * @param SerializerInterface $serializer
+     * @param UploaderHelper $uploaderHelper
+     * @param ValidatorInterface $validator
+     * @param PropertyListExtractorInterface $propertyListExtractor
+     * @param UserCompanyRepository $userCompanyRepository
+     */
     public function __construct(EntityManagerInterface $entityManager, EventRepository $eventRepository, EventDetailRepository $eventDetailRepository, SerializerInterface $serializer, UploaderHelper $uploaderHelper, ValidatorInterface $validator, PropertyListExtractorInterface $propertyListExtractor, UserCompanyRepository $userCompanyRepository)
     {
         $this->entityManager = $entityManager;
@@ -101,7 +101,7 @@ class EventService
         $this->uploaderHelper = $uploaderHelper;
         $this->validator = $validator;
         $this->propertyListExtractor = $propertyListExtractor;
-	    $this->userCompanyRepository = $userCompanyRepository;
+        $this->userCompanyRepository = $userCompanyRepository;
     }
 
     public function create(Event $event, Company $company): Event
@@ -128,11 +128,11 @@ class EventService
     {
         $event->setDescription($updatedEvent->getDescription());
         $event->setIsUserLimitReached($updatedEvent->getIsUserLimitReached());
-	    $event->setPhone($updatedEvent->getPhone());
-	    $event->setIsDeposit($updatedEvent->getIsDeposit());
-	    $event->setDepositAmount($updatedEvent->getDepositAmount());
+        $event->setPhone($updatedEvent->getPhone());
+        $event->setIsDeposit($updatedEvent->getIsDeposit());
+        $event->setDepositAmount($updatedEvent->getDepositAmount());
 
-	    if($event->getUsers()->count() == 0){
+        if($event->getUsers()->count() == 0){
             $event->setStartDate($updatedEvent->getStartDate());
             $event->setEndDate($updatedEvent->getEndDate());
 
@@ -181,12 +181,12 @@ class EventService
         return $events;
     }
 
-	public function getForUsersWithFilters(ParamFetcher $paramFetcher, User $user)
-	{
-		$events = $this->eventRepository->findForUsersWithFilters($paramFetcher, $user);
+    public function getForUsersWithFilters(ParamFetcher $paramFetcher, User $user)
+    {
+        $events = $this->eventRepository->findForUsersWithFilters($paramFetcher, $user);
 
-		return $events;
-	}
+        return $events;
+    }
 
     /**
      * @param Event $event

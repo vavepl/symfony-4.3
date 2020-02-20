@@ -21,12 +21,12 @@ class CompanyVoter extends Voter
         self::EDIT,
     ];
 
-	/**
-	 * @param string $attribute
-	 * @param mixed $subject
-	 * @return bool
-	 */
-	protected function supports($attribute, $subject)
+    /**
+     * @param string $attribute
+     * @param mixed $subject
+     * @return bool
+     */
+    protected function supports($attribute, $subject)
     {
         if (!in_array($attribute, self::ATTRIBUTES)) {
             return false;
@@ -35,13 +35,13 @@ class CompanyVoter extends Voter
         return true;
     }
 
-	/**
-	 * @param string $attribute
-	 * @param mixed $subject
-	 * @param TokenInterface $token
-	 * @return bool
-	 */
-	protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
+    /**
+     * @param string $attribute
+     * @param mixed $subject
+     * @param TokenInterface $token
+     * @return bool
+     */
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
         $employee = $token->getUser();
         if (!$employee instanceof Employee) {
@@ -58,22 +58,22 @@ class CompanyVoter extends Voter
         throw new LogicException(Messages::THIS_CODE_SHOULD_NOT_BE_REACHED);
     }
 
-	/**
-	 * @param Company $company
-	 * @param Employee $employee
-	 * @return bool
-	 */
-	private function canView(Company $company, Employee $employee)
+    /**
+     * @param Company $company
+     * @param Employee $employee
+     * @return bool
+     */
+    private function canView(Company $company, Employee $employee)
     {
         return $company->getEmployees()->contains($employee);
     }
 
-	/**
-	 * @param Company $company
-	 * @param Employee $employee
-	 * @return bool
-	 */
-	private function canEdit(Company $company, Employee $employee)
+    /**
+     * @param Company $company
+     * @param Employee $employee
+     * @return bool
+     */
+    private function canEdit(Company $company, Employee $employee)
     {
         return $company->getEmployees()->contains($employee)
             && in_array(Employee::ROLE_COMPANY_OWNER, $employee->getRoles());

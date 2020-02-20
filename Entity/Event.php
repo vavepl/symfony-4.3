@@ -175,22 +175,22 @@ class Event
      */
     private $files = [];
 
-	/**
-	 * @var int $priceFrom
-	 * @Groups({"read"})
-	 */
+    /**
+     * @var int $priceFrom
+     * @Groups({"read"})
+     */
     private $priceFrom;
 
-	/**
-	 * @var int $priceTo
-	 * @Groups({"read"})
-	 */
+    /**
+     * @var int $priceTo
+     * @Groups({"read"})
+     */
     private $priceTo;
 
-	/**
-	 * @var int $getUsers
-	 * @Groups({"read"})
-	 */
+    /**
+     * @var int $getUsers
+     * @Groups({"read"})
+     */
     private $getUsers;
 
     /**
@@ -207,7 +207,7 @@ class Event
         $this->ratingScore = 0;
         $this->ratingTotal = 0;
         $this->ratingCounter = 0;
-	    $this->created_at = new \DateTime();
+        $this->created_at = new \DateTime();
     }
 
     public function getId(): ?int
@@ -549,10 +549,10 @@ class Event
         return $this;
     }
 
-	/**
-	 * @return int
-	 */
-	public function getGetUsers(): int
+    /**
+     * @return int
+     */
+    public function getGetUsers(): int
     {
         if($this->getUsers === null){
             return $this->users->count();
@@ -561,18 +561,18 @@ class Event
         }
     }
 
-	/**
-	 * @param int $users
-	 * @return Event
-	 */
-	public function setGetUsers(int $users): self
+    /**
+     * @param int $users
+     * @return Event
+     */
+    public function setGetUsers(int $users): self
     {
         $this->getUsers = $users;
 
         return $this;
     }
 
-	public function getPriceFrom(): int
+    public function getPriceFrom(): int
     {
         $priceFrom = 0;
 
@@ -587,7 +587,7 @@ class Event
         return $priceFrom;
     }
 
-	public function getPriceTo(): int
+    public function getPriceTo(): int
     {
         $priceTo = 0;
 

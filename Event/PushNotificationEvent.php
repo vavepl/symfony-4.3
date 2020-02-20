@@ -29,12 +29,12 @@ class PushNotificationEvent extends Event
 
     protected $company;
 
-	/**
-	 * UserRegisterEvent constructor.
-	 * @param UserInterface $user
-	 * @param MessageNotificationInterface $message
-	 * @param UserEvent $userEvent
-	 */
+    /**
+     * UserRegisterEvent constructor.
+     * @param UserInterface $user
+     * @param MessageNotificationInterface $message
+     * @param UserEvent $userEvent
+     */
     public function __construct(UserInterface $user, MessageNotificationInterface $message, UserEvent $userEvent)
     {
         $this->user = $user;

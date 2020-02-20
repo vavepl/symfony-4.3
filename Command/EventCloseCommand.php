@@ -28,10 +28,10 @@ class EventCloseCommand extends Command
     private $entityManager;
 
     /**
-	 * EventNotificationCommand constructor.
-	 * @param EventRepository $eventRepository
-	 * @param EntityManagerInterface $entityManager
-	 */
+     * EventNotificationCommand constructor.
+     * @param EventRepository $eventRepository
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(EventRepository $eventRepository, EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
