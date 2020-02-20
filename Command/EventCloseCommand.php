@@ -27,7 +27,7 @@ class EventCloseCommand extends Command
      */
     private $entityManager;
 
-	/**
+    /**
 	 * EventNotificationCommand constructor.
 	 * @param EventRepository $eventRepository
 	 * @param EntityManagerInterface $entityManager
