@@ -1,0 +1,72 @@
+framework:
+    workflows:
+        user_event_state:
+            type: 'state_machine'
+            marking_store:
+                type: 'method'
+                property: 'status'
+            supports:
+                - App\Entity\UserEvent
+            initial_marking: init
+            places:
+                - init
+                - applied
+                - invited
+                - accepted
+                - paid
+                - confirmed
+                - scaned
+                - company_removed
+                - user_removed
+                - company_canceled
+                - user_canceled
+                - changed_date_company
+            transitions:
+                user_apply:
+                    guard: "has_role('ROLE_USER')"
+                    from: [init, user_canceled]
+                    to:   applied
+                company_invite:
+                    guard: "has_role('ROLE_COMPANY_OWNER') or has_role('ROLE_COMPANY_EMPLOYEE')"
+                    from: [init, company_canceled]
+                    to: invited
+                user_cancel:
+                    guard: "has_role('ROLE_USER')"
+                    from: [applied, accepted, invited]
+                    to:   user_canceled
+                company_accept:
+                    guard: "has_role('ROLE_COMPANY_OWNER') or has_role('ROLE_COMPANY_EMPLOYEE')"
+                    from: applied
+                    to:   accepted
+                company_remove:
+                    guard: "has_role('ROLE_COMPANY_OWNER') or has_role('ROLE_COMPANY_EMPLOYEE')"
+                    from: paid
+                    to: company_removed
+                user_remove:
+                    guard: "has_role('ROLE_USER')"
+                    from: paid
+                    to: user_removed
+                company_paid:
+                    guard: "has_role('ROLE_COMPANY_OWNER') or has_role('ROLE_COMPANY_EMPLOYEE')"
+                    from: accepted
+                    to: paid
+                user_confirm_presence:
+                    guard: "has_role('ROLE_USER')"
+                    from: paid
+                    to: confirmed
+                company_scan_code:
+                    guard: "has_role('ROLE_COMPANY_OWNER') or has_role('ROLE_COMPANY_EMPLOYEE')"
+                    from: [paid, confirmed]
+                    to: scaned
+                company_cancel:
+                    guard: "has_role('ROLE_COMPANY_OWNER') or has_role('ROLE_COMPANY_EMPLOYEE')"
+                    from: [invited, accepted, applied]
+                    to: company_canceled
+                user_accept:
+                    guard: "has_role('ROLE_USER')"
+                    from: invited
+                    to: accepted
+                change_date_company:
+                    guard: "has_role('ROLE_COMPANY_OWNER') or has_role('ROLE_COMPANY_EMPLOYEE')"
+                    from: [paid]
+                    to: changed_date_company
